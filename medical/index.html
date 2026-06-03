@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kriscel Med Solution - Medical & Hospital Equipment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --light:#EAE3D2;
+  --soft:#D1C6B8;
+  --mid:#B7A99A;
+  --accent:#A18C7A;
+  --dark:#8B7B6A;
+  --text:#4F443B;
+  --text-muted:#65584C;
+  --inverse:#F6F0E6;
+  --line:rgba(139,123,106,.24);
+  --shadow:0 18px 42px rgba(139,123,106,.16);
+}
+html{scroll-behavior:smooth}
+body{font-family:Outfit,Arial,sans-serif;background:var(--inverse) url("assets/network-light.jpg") center top/150% auto no-repeat fixed;color:var(--text);line-height:1.5;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+button,input,select,textarea{font:inherit}
+.container{width:min(1200px,92vw);margin:auto}
+.topbar{position:fixed;top:0;left:0;right:0;z-index:60;background:var(--text);color:var(--inverse);font-size:13px;border-bottom:1px solid rgba(234,227,210,.18)}
+.topbar-inner{height:36px;display:flex;justify-content:space-between;align-items:center;gap:18px}
+.topbar-links{display:flex;gap:18px;align-items:center;white-space:nowrap}
+.navbar{position:sticky;top:36px;left:0;right:0;z-index:55;background:rgba(234,227,210,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav-inner{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-mark{width:42px;height:42px;border-radius:8px;background:var(--text);color:var(--inverse);display:grid;place-items:center;font-weight:900;font-size:23px}
+.brand-text strong{display:block;font-family:"Playfair Display",serif;font-size:23px;line-height:1;color:var(--text)}
+.brand-text span{display:block;font-size:12px;color:var(--text-muted);font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-top:3px}
+.nav-links{display:flex;align-items:center;gap:30px;list-style:none;font-size:14px;font-weight:700;color:var(--text)}
+.nav-links a{padding:8px 0;position:relative}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--accent);transition:.2s}
+.nav-links a:hover::after{width:100%}
+.nav-links a.active{color:var(--accent);font-weight:800}
+.nav-links a.active::after{width:100%}
+.nav-links .has-menu>a{padding-right:16px}
+.nav-links .has-menu>a::before{content:"";position:absolute;right:0;top:50%;width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid var(--text);transform:translateY(-35%)}
+.nav-links li{position:relative}
+.dropdown{position:absolute;left:0;top:36px;min-width:220px;background:var(--inverse);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:8px;display:none;z-index:80}
+.has-menu:hover .dropdown,.has-menu.open .dropdown{display:grid}
+.dropdown a{display:block;padding:10px 12px;border-radius:6px;white-space:nowrap}
+.dropdown a:hover{background:var(--soft)}
+.nav-actions{display:flex;gap:10px;align-items:center}
+.search-icon{width:42px;height:42px;border:1px solid var(--line);border-radius:7px;background:var(--inverse);color:var(--text);display:grid;place-items:center;font-weight:900;cursor:pointer;transition:.2s}
+.search-icon:hover{background:var(--soft)}
+.menu-btn{display:none;border:1px solid var(--line);background:transparent;border-radius:7px;width:42px;height:42px;color:var(--text);font-weight:900}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid transparent;border-radius:7px;padding:12px 17px;font-weight:800;cursor:pointer;transition:.2s;white-space:nowrap}
+.btn-primary{background:var(--text);color:var(--inverse);box-shadow:0 12px 26px rgba(139,123,106,.24)}
+.btn-primary:hover{background:var(--accent);transform:translateY(-1px)}
+.btn-soft{background:var(--inverse);border-color:var(--line);color:var(--text)}
+.btn-soft:hover{background:var(--soft)}
+.btn-small{padding:9px 11px;font-size:13px}
+.eyebrow{display:inline-flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:999px;background:rgba(234,227,210,.72);padding:6px 12px;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--text)}
+.eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:28px;margin-bottom:28px}
+/* Force heading blocks to center when needed via inline styles */
+.section-head > div{width:auto}
+.section-title{font-family:"Playfair Display",serif;font-size:clamp(30px,4vw,46px);line-height:1.07;margin-top:12px;color:var(--text)}
+.section-copy{max-width:640px;color:var(--text-muted);font-size:16px}
+section{padding:70px 0}
+
+.hero{padding:90px 0 25px;background:linear-gradient(180deg,var(--light),var(--soft));position:relative;overflow:hidden;min-height:420px}
+.hero-video-bg{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.hero-video-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(79,68,59,.75);z-index:1;pointer-events:none}
+.hero-content-slider{position:relative;z-index:2;max-width:900px;margin:0 auto;padding:35px 20px;text-align:center;color:var(--inverse)}
+.hero-text-wrapper{position:relative;min-height:200px;margin-bottom:20px}
+.hero-text-slide{position:absolute;top:0;left:0;right:0;opacity:0;transform:translateX(100%);transition:all 0.7s ease-in-out;padding:0 20px;pointer-events:none}
+.hero-text-slide.active{opacity:1;transform:translateX(0);pointer-events:auto}
+.hero-text-slide.exit{opacity:0;transform:translateX(-100%);pointer-events:none}
+.hero-text-slide .eyebrow{background:rgba(234,227,210,.2);border-color:rgba(234,227,210,.3);color:var(--inverse);display:inline-flex;margin-bottom:15px}
+.hero-text-slide h1{font-family:"Playfair Display",serif;font-size:clamp(28px,4vw,42px);line-height:1.15;color:var(--inverse);margin-bottom:15px}
+.hero-text-slide h1 span{color:var(--soft)}
+.hero-text-slide p{font-size:15px;line-height:1.5;color:rgba(246,240,230,.92);max-width:700px;margin:0 auto}
+.hero-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:30px;position:relative;z-index:3}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;max-width:700px;margin:0 auto;position:relative;z-index:3}
+.stat-box{text-align:center}
+.stat-box strong{display:block;font-size:clamp(38px,5vw,52px);font-weight:900;color:var(--inverse);line-height:1}
+.stat-box strong span{font-size:.6em;color:var(--soft)}
+.stat-box span{display:block;margin-top:8px;font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:rgba(246,240,230,.75);font-weight:700}
+.hero-dots{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:10}
+.hero-dot{width:12px;height:12px;border-radius:50%;background:rgba(246,240,230,.4);cursor:pointer;transition:.3s;border:none;padding:0}
+.hero-dot.active{background:var(--soft);width:32px;border-radius:6px}
+
+.trust-bar{padding:18px 0;background:var(--text);color:var(--inverse)}
+.trust-row{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.trust-pill{border:1px solid rgba(234,227,210,.2);border-radius:8px;padding:14px;text-align:center;background:rgba(234,227,210,.06);font-weight:800;font-size:14px}
+.trust-pill span{display:block;margin-top:3px;font-weight:500;font-size:12px;color:rgba(246,240,230,.80)}
+
+.category-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:13px}
+.category-card{border:1px solid var(--line);border-radius:8px;background:linear-gradient(135deg,rgba(234,227,210,.6),rgba(209,198,184,.5));padding:17px;min-height:126px;transition:.3s;cursor:pointer;text-align:left;box-shadow:0 2px 8px rgba(139,123,106,.08)}
+.category-card:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(139,123,106,.22);background:linear-gradient(135deg,var(--soft),var(--light));border-color:var(--dark)}
+.cat-icon{width:42px;height:42px;border-radius:8px;background:linear-gradient(135deg,var(--dark),var(--text));color:var(--inverse);display:grid;place-items:center;font-weight:900;margin-bottom:12px;box-shadow:0 4px 12px rgba(79,68,59,.3);transition:.3s}
+.category-card:hover .cat-icon{transform:scale(1.08);box-shadow:0 6px 16px rgba(79,68,59,.45);background:linear-gradient(135deg,var(--text),var(--dark))}
+.category-card h3{font-size:15px;transition:.2s;color:var(--text)}
+.category-card:hover h3{color:var(--text)}
+.category-card p{font-size:12px;color:var(--text-muted);margin-top:4px}
+
+.products{background:linear-gradient(rgba(246,240,230,.76),rgba(209,198,184,.78)),url("assets/network-light.jpg") center/cover fixed}
+.catalogue-tools{display:grid;grid-template-columns:1fr auto;gap:14px;margin-bottom:18px}
+.catalogue-search{border:1px solid var(--line);background:var(--inverse);border-radius:8px;padding:12px 14px;outline:0;color:var(--text);width:100%}
+.filter-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.filter-btn{border:1px solid var(--line);background:var(--inverse);color:var(--text);border-radius:999px;padding:8px 12px;font-size:13px;font-weight:800;cursor:pointer}
+.filter-btn.active,.filter-btn:hover{background:var(--text);color:var(--inverse);border-color:var(--text)}
+.product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.product-card{border:1px solid var(--line);background:var(--inverse);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 10px 24px rgba(139,123,106,.10);transition:.2s}
+.product-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.product-img{height:190px;position:relative;background:var(--soft);overflow:hidden}
+.product-img img{width:100%;height:100%;object-fit:cover;transition:.3s}
+.product-card:hover img{transform:scale(1.04)}
+.badge{position:absolute;left:12px;top:12px;background:rgba(79,68,59,.94);color:var(--inverse);padding:5px 9px;border-radius:6px;font-size:11px;font-weight:900;text-transform:uppercase}
+.product-body{padding:17px;display:flex;flex-direction:column;gap:10px;flex:1}
+.product-meta{display:flex;justify-content:space-between;font-size:12px;font-weight:800;color:var(--text-muted);gap:10px}
+.product-body h3{font-size:19px;line-height:1.2}
+.product-body p{font-size:13px;color:var(--text-muted)}
+.specs{display:flex;gap:6px;flex-wrap:wrap}
+.specs span{font-size:11px;font-weight:800;border:1px solid var(--line);border-radius:5px;background:var(--soft);padding:4px 7px}
+.product-actions{display:grid;grid-template-columns:1fr 1fr 42px;gap:8px;margin-top:auto}
+.wa{background:var(--text);color:var(--inverse);border-radius:6px;display:grid;place-items:center;font-weight:900}
+.empty-state{display:none;border:1px dashed var(--dark);padding:28px;text-align:center;border-radius:8px;background:var(--light)}
+
+.brand-strip{display:flex;gap:12px;overflow:hidden;position:relative;padding:20px 0}
+.brand-strip::before,.brand-strip::after{content:"";position:absolute;top:0;bottom:0;width:100px;z-index:2;pointer-events:none}
+.brand-strip::before{left:0;background:linear-gradient(to right,var(--inverse),transparent)}
+.brand-strip::after{right:0;background:linear-gradient(to left,var(--inverse),transparent)}
+.brand-scroll{display:flex;gap:12px;animation:scrollBrands 12s linear infinite;will-change:transform}
+.brand-scroll:hover{animation-play-state:paused}
+.brand-logo{border:1px solid var(--line);background:linear-gradient(135deg,rgba(234,227,210,.6),rgba(209,198,184,.5));border-radius:8px;min-height:92px;min-width:180px;display:grid;place-items:center;text-align:center;font-weight:900;font-size:18px;box-shadow:0 8px 20px rgba(139,123,106,.12);transition:all .4s ease;cursor:pointer;flex-shrink:0}
+.brand-logo:hover{transform:scale(1.08) translateY(-4px);box-shadow:0 16px 36px rgba(139,123,106,.22);border-color:var(--accent);background:linear-gradient(135deg,var(--soft),var(--light))}
+.brand-logo span{display:block;font-size:11px;font-weight:700;color:var(--text-muted);margin-top:3px;transition:.3s}
+.brand-logo:hover span{color:var(--accent)}
+@keyframes scrollBrands{
+  0%{transform:translate3d(0,0,0)}
+  100%{transform:translate3d(-100%,0,0)}
+}
+
+.industries{background:var(--text);color:var(--inverse)}
+.industries .section-title{color:var(--inverse)}
+.industries .section-copy{color:rgba(246,240,230,.82)}
+.industries .eyebrow{border-color:rgba(234,227,210,.24);background:rgba(234,227,210,.08);color:var(--inverse)}
+.industry-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.industry-card{border:1px solid rgba(234,227,210,.2);background:rgba(234,227,210,.08);border-radius:8px;padding:18px;min-height:132px}
+.industry-card strong{display:block;margin:8px 0 4px}
+.industry-card span{font-size:13px;color:rgba(246,240,230,.80)}
+
+.solutions-grid,.install-grid,.why-grid,.cert-grid{display:grid;gap:18px}
+.solutions-grid{grid-template-columns:repeat(4,1fr)}
+.solution-card,.install-card,.why-card,.cert-card,.download-card{border:1px solid var(--line);border-radius:8px;background:rgba(234,227,210,.35);padding:20px;box-shadow:0 10px 24px rgba(139,123,106,.08);transition:all .4s ease;cursor:pointer;position:relative}
+.solution-card:hover,.why-card:hover,.cert-card:hover,.download-card:hover{transform:scale(1.03);box-shadow:0 20px 50px rgba(161,140,122,.22),inset 0 0 60px rgba(161,140,122,.12);border-color:var(--accent);background:linear-gradient(135deg,var(--soft),var(--light))}
+.solution-card strong,.why-card strong,.cert-card strong{display:block;font-size:18px;margin-bottom:7px;transition:.4s}
+.solution-card:hover strong,.why-card:hover strong,.cert-card:hover strong{color:var(--text);text-shadow:0 2px 8px rgba(161,140,122,.3);transform:scale(1.05)}
+.solution-card p,.why-card p,.cert-card p{font-size:14px;color:var(--text-muted);transition:.4s}
+.solution-card:hover p,.why-card:hover p,.cert-card:hover p{color:var(--text)}
+.install-grid{grid-template-columns:repeat(3,1fr)}
+.install-card{padding:0;overflow:hidden}
+.install-card img{height:190px;width:100%;object-fit:cover}
+.install-body{padding:18px}
+.install-body strong{display:block;font-size:18px}
+.install-body span{display:block;color:var(--text-muted);font-size:13px;margin-top:5px}
+.why-grid{grid-template-columns:repeat(4,1fr)}
+.cert-grid{grid-template-columns:repeat(6,1fr)}
+.cert-card{text-align:center}
+.cert-mark{width:54px;height:54px;border-radius:8px;background:var(--soft);display:grid;place-items:center;margin:0 auto 10px;font-weight:900}
+
+/* Certifications marquee (continuous, no ending) */
+.cert-marquee-wrap{overflow:hidden}
+.cert-marquee{display:flex;gap:12px;animation:certScroll 10s linear infinite;will-change:transform}
+.cert-row{display:flex;gap:12px;flex-shrink:0}
+.cert-marquee:hover{animation-play-state:paused}
+
+@keyframes certScroll{
+  0%{transform:translate3d(0,0,0)}
+  100%{transform:translate3d(-50%,0,0)}
+}
+
+.downloads{background:linear-gradient(rgba(246,240,230,.76),rgba(209,198,184,.78)),url("assets/network-light.jpg") center/cover fixed}
+.download-row{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+
+.contact{background:linear-gradient(rgba(246,240,230,.76),rgba(209,198,184,.78)),url("assets/network-light.jpg") center/cover fixed}
+.contact-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:24px;align-items:start}
+.contact-card{background:var(--inverse);border:1px solid var(--line);border-radius:8px;padding:24px;box-shadow:var(--shadow)}
+.contact-list{display:grid;gap:14px;margin-top:22px}
+.contact-list div{display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--line);padding-bottom:14px}
+.contact-list strong{display:block}
+.contact-list span{display:block;color:var(--text-muted);font-size:14px}
+.contact-icon{width:44px;height:44px;border-radius:8px;background:var(--soft);font-weight:900;flex:0 0 auto;display:flex;align-items:center;justify-content:center;line-height:1}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{display:grid;gap:6px}
+.field.full{grid-column:1/-1}
+label{font-size:12px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--text)}
+input,select,textarea{width:100%;border:1px solid var(--line);border-radius:7px;background:var(--inverse);color:var(--text);padding:12px;outline:0}
+input:focus,select:focus,textarea:focus{border-color:var(--text);box-shadow:0 0 0 3px rgba(139,123,106,.16)}
+textarea{resize:vertical}
+
+footer{background:var(--text);color:rgba(246,240,230,.84);padding:54px 0 24px}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.1fr;gap:30px}
+.footer-title{color:var(--inverse);font-weight:900;text-transform:uppercase;letter-spacing:.08em;font-size:13px;margin-bottom:12px}
+.footer-links{list-style:none;display:grid;gap:8px;font-size:14px}
+.footer-links a:hover{color:var(--soft)}
+.footer-brand p{margin-top:12px;max-width:310px}
+.footer-bottom{border-top:1px solid rgba(234,227,210,.2);margin-top:34px;padding-top:18px;display:flex;justify-content:space-between;gap:16px;font-size:13px;color:rgba(246,240,230,.68)}
+.reveal{opacity:0;transform:translateY(18px);transition:.45s}
+.reveal.visible{opacity:1;transform:none}
+
+@media(max-width:1060px){
+  .hero-content{padding:50px 20px}
+  .hero-stats{grid-template-columns:repeat(3,1fr);gap:20px}
+  .contact-grid{grid-template-columns:1fr}
+  .hero-copy,.hero-media{min-height:auto}
+  .category-grid{grid-template-columns:repeat(3,1fr)}
+  .product-grid,.install-grid,.download-row{grid-template-columns:repeat(2,1fr)}
+  .brand-strip,.industry-grid,.cert-grid{grid-template-columns:repeat(3,1fr)}
+  .solutions-grid,.why-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:1280px){
+  .topbar{display:none}
+  .navbar{top:0}
+  .nav-inner{height:68px}
+  .nav-links{position:absolute;left:4vw;right:4vw;top:76px;background:var(--inverse);border:1px solid var(--line);border-radius:8px;padding:16px;display:none;flex-direction:column;align-items:flex-start;box-shadow:var(--shadow)}
+  .nav-links.open{display:flex}
+  .nav-links .dropdown{position:static;box-shadow:none;margin-top:4px;width:100%}
+  .search-icon{display:none}
+  .menu-btn{display:grid;place-items:center}
+  .hero{padding-top:90px;min-height:500px}
+  .hero-content{padding:40px 20px}
+  .hero-content h1{font-size:32px}
+  .hero-stats{grid-template-columns:1fr;gap:15px}
+  .stat-box strong{font-size:42px}
+  .hero-copy{padding:28px}
+  .trust-row,.category-grid,.product-grid,.brand-strip,.industry-grid,.solutions-grid,.install-grid,.why-grid,.cert-grid,.download-row,.footer-grid{grid-template-columns:1fr}
+  .section-head{display:block}
+  .catalogue-tools,.form-grid{grid-template-columns:1fr}
+  .product-actions{grid-template-columns:1fr}
+  .wa{padding:10px}
+  section{padding:52px 0}
+  .footer-bottom{display:block}
+}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="container topbar-inner">
+    <span>ISO-ready hospital equipment procurement | Pan-India delivery and AMC support</span>
+    <div class="topbar-links">
+      <span>+91 98765 43210</span>
+      <span>sales@kriscelmed.in</span>
+      <a href="downloads.html#downloads">Downloads</a>
+    </div>
+  </div>
+</div>
+
+<header class="navbar">
+  <div class="container nav-inner">
+
+    <a class="brand" href="index.html" aria-label="Kriscel Med Solution home">
+      <span class="brand-mark">K</span>
+      <span class="brand-text"><strong>Kriscel Med</strong><span>Solution</span></span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li class="has-menu"><a href="#" data-dropdown-toggle>Categories</a>
+        <div class="dropdown">
+
+          <a href="equipment.html#products">All Equipment</a>
+          <a href="equipment.html#products?cat=ICU%20Equipment">ICU Equipment</a>
+          <a href="equipment.html#products?cat=Hospital%20Furniture">Hospital Furniture</a>
+          <a href="equipment.html#products?cat=Diagnostic%20Equipment">Diagnostic Equipment</a>
+          <a href="equipment.html#products?cat=Surgical%20Instruments">Surgical Instruments</a>
+          <a href="equipment.html#products?cat=Laboratory%20Equipment">Laboratory Equipment</a>
+          <a href="equipment.html#products?cat=Infant%20Care%20Equipment">Infant Care Equipment</a>
+          <a href="equipment.html#products?cat=Dental%20Equipment">Dental Equipment</a>
+        </div>
+      </li>
+      <li class="has-menu"><a href="brands.html" data-dropdown-toggle>Brands</a>
+        <div class="dropdown"><a href="brands.html#brands">Partner Brands</a><a href="brands.html#brands">Private Label</a></div>
+      </li>
+      <li class="has-menu"><a href="industries.html" data-dropdown-toggle>Industries</a>
+        <div class="dropdown"><a href="industries.html#industries">Hospitals</a><a href="industries.html#industries">Clinics</a><a href="industries.html#industries">Distributors</a></div>
+      </li>
+      <li class="has-menu"><a href="#" data-dropdown-toggle>Projects</a>
+        <div class="dropdown"><a href="projects.html#solutions">Hospital Setup Projects</a><a href="equipment.html#products">Equipment Supplied</a></div>
+      </li>
+      <li><a href="downloads.html">Downloads</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="search-icon" id="searchIcon" aria-label="Search equipment">⌕</button>
+      <a class="btn btn-primary btn-small" href="contact.html#contact">Request Quote</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu">=</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero" id="home">
+    <video class="hero-video-bg" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1920&q=80">
+      <source src="istockphoto-1934715993-640_adpp_is.mp4" type="video/mp4">
+    </video>
+    <div class="hero-video-overlay"></div>
+    <div class="container">
+      <div class="hero-content-slider">
+        
+        <!-- Text Content Slider (Only heading & paragraph) -->
+        <div class="hero-text-wrapper">
+          <div class="hero-text-slide active">
+            <span class="eyebrow">ISO 13485 Certified</span>
+            <h1>Innovative Medical Solutions <span>Powering Healthcare Excellence</span></h1>
+            <p>From ICU to OPD — complete range of certified medical equipment with pan-India delivery and installation support.</p>
+          </div>
+          
+          <div class="hero-text-slide">
+            <span class="eyebrow">Medical Equipment Supplier</span>
+            <h1>Hospital Equipment Catalogue <span>Built for Procurement Teams</span></h1>
+            <p>ICU equipment, hospital furniture, diagnostic devices, surgical instruments and lab equipment with complete documentation.</p>
+          </div>
+          
+          <div class="hero-text-slide">
+            <span class="eyebrow">Pan-India Delivery</span>
+            <h1>Trusted by 500+ <span>Healthcare Facilities</span></h1>
+            <p>Complete installation support, warranty coverage and AMC contracts. Equipment procurement simplified for hospitals and clinics.</p>
+          </div>
+        </div>
+        
+        <!-- Fixed Buttons (Always visible) -->
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="equipment.html#products">View Catalogue</a>
+          <a class="btn btn-soft" href="contact.html#contact">Request a Demo</a>
+        </div>
+        
+        <!-- Fixed Stats (Always visible) -->
+        <div class="hero-stats">
+          <div class="stat-box">
+            <strong>500<span>+</span></strong>
+            <span>Hospitals Served</span>
+          </div>
+          <div class="stat-box">
+            <strong>5000<span>+</span></strong>
+            <span>Units Deployed</span>
+          </div>
+          <div class="stat-box">
+            <strong>150<span>+</span></strong>
+            <span>Cities Covered</span>
+          </div>
+        </div>
+        
+      </div>
+      
+      <!-- Slider Dots -->
+      <div class="hero-dots">
+        <button class="hero-dot active" data-slide="0"></button>
+        <button class="hero-dot" data-slide="1"></button>
+        <button class="hero-dot" data-slide="2"></button>
+      </div>
+      
+    </div>
+  </section>
+
+  <section class="trust-bar">
+    <div class="container trust-row">
+      <div class="trust-pill">ISO 13485<span>Documentation support</span></div>
+      <div class="trust-pill">CE Certified<span>Selected product range</span></div>
+      <div class="trust-pill">Pan-India<span>Delivery and installation</span></div>
+      <div class="trust-pill">AMC Support<span>Service contracts</span></div>
+      <div class="trust-pill">Bulk Quotes<span>Hospitals and distributors</span></div>
+    </div>
+  </section>
+
+  <section id="categories">
+    <div class="container">
+      <div class="section-head" style="justify-content:center;text-align:center;flex-direction:column;align-items:center;gap:14px">
+        <div style="text-align:center;display:block">
+          <span class="eyebrow">Equipment Categories</span>
+          <h2 class="section-title">Browse equipment by department and use case.</h2>
+        </div>
+        <p class="section-copy" style="margin-left:0;max-width:760px;text-align:center">Inspired by catalogue-heavy suppliers, categories are kept visible so buyers can quickly shortlist departments and product families.</p>
+      </div>
+      <div class="category-grid">
+        <button class="category-card" data-jump="ICU Equipment"><span class="cat-icon">ICU</span><h3>ICU Equipment</h3><p>Ventilators, monitors, pumps</p></button>
+        <button class="category-card" data-jump="Hospital Furniture"><span class="cat-icon">BED</span><h3>Hospital Furniture</h3><p>Beds, trolleys, cabinets</p></button>
+        <button class="category-card" data-jump="Diagnostic Equipment"><span class="cat-icon">DX</span><h3>Diagnostic Equipment</h3><p>ECG, vitals, ultrasound</p></button>
+        <button class="category-card" data-jump="Surgical Instruments"><span class="cat-icon">OT</span><h3>Surgical Instruments</h3><p>OT tools and lights</p></button>
+        <button class="category-card" data-jump="Laboratory Equipment"><span class="cat-icon">LAB</span><h3>Laboratory Equipment</h3><p>Autoclaves and analyzers</p></button>
+        <button class="category-card" data-jump="Infant Care Equipment"><span class="cat-icon">NICU</span><h3>Infant Care</h3><p>Warmers and incubators</p></button>
+        <button class="category-card" data-jump="Physiotherapy & Rehabilitation"><span class="cat-icon">PHY</span><h3>Physiotherapy</h3><p>Rehab and therapy</p></button>
+        <button class="category-card" data-jump="Dental Equipment"><span class="cat-icon">DEN</span><h3>Dental Equipment</h3><p>Chairs and compressors</p></button>
+        <button class="category-card" data-jump="Ophthalmic Equipment"><span class="cat-icon">EYE</span><h3>Ophthalmic</h3><p>Eye clinic equipment</p></button>
+        <button class="category-card" data-jump="X-Ray & Imaging Accessories"><span class="cat-icon">IMG</span><h3>X-Ray Accessories</h3><p>DR panels and shielding</p></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="products" id="products">
+    <div class="container">
+      <div class="section-head" style="flex-direction:column;align-items:center;text-align:center;justify-content:center;gap:14px">
+        <div><span class="eyebrow">Featured Equipment</span><h2 class="section-title">Professional product cards with image, specs and enquiry actions.</h2></div>
+        <p class="section-copy">Each card is designed for quote conversion: category badge, model number, quick specs, details, quote and WhatsApp enquiry.</p>
+      </div>
+      <div style="text-align: right; margin-bottom: 24px;">
+        <a class="btn btn-primary" href="contact.html#contact">Request Quote</a>
+      </div>
+      <div class="product-grid" id="productGrid"></div>
+      <div class="empty-state" id="emptyState">No matching equipment found. Try another search or category.</div>
+    </div>
+  </section>
+
+  <section id="brands">
+    <div class="container">
+      <div class="section-head" style="flex-direction:column;align-items:center;text-align:center;justify-content:center;gap:14px">
+        <div><span class="eyebrow">Brands</span><h2 class="section-title">Multi-brand supply for flexible procurement.</h2></div>
+        <p class="section-copy">Use this section to show OEM partners, imported ranges, Indian manufacturer partners or private-label equipment lines.</p>
+      </div>
+      <div class="brand-strip">
+        <div class="brand-scroll">
+          <div class="brand-logo">Kriscel<span>Private Label</span></div>
+          <div class="brand-logo">Narang<span>Hospital Supply</span></div>
+          <div class="brand-logo">MediPro<span>ICU Range</span></div>
+          <div class="brand-logo">LabSure<span>Laboratory</span></div>
+          <div class="brand-logo">CareBed<span>Furniture</span></div>
+          <div class="brand-logo">OptiDent<span>Dental</span></div>
+          <!-- Duplicate for seamless loop -->
+          <div class="brand-logo">Kriscel<span>Private Label</span></div>
+          <div class="brand-logo">Narang<span>Hospital Supply</span></div>
+          <div class="brand-logo">MediPro<span>ICU Range</span></div>
+          <div class="brand-logo">LabSure<span>Laboratory</span></div>
+          <div class="brand-logo">CareBed<span>Furniture</span></div>
+          <div class="brand-logo">OptiDent<span>Dental</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="industries" id="industries" style="text-align:center;">
+    <style>
+      #industries .section-head{flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px}
+      #industries .section-copy{margin-left:0;text-align:center}
+    </style>
+
+    <div class="container">
+      <div class="section-head">
+        <div><span class="eyebrow">Industries</span><h2 class="section-title">Serving every healthcare buying channel.</h2></div>
+        <p class="section-copy">Hospitals, clinics, labs, colleges, distributors and tenders need different buying signals. The site now speaks to all of them.</p>
+      </div>
+      <div class="industry-grid">
+        <div class="industry-card"><span>01</span><strong>Hospitals</strong><span>ICU, OT, ward and emergency setup</span></div>
+        <div class="industry-card"><span>02</span><strong>Clinics</strong><span>Compact diagnostics and furniture</span></div>
+        <div class="industry-card"><span>03</span><strong>Diagnostic Labs</strong><span>Lab and imaging accessories</span></div>
+        <div class="industry-card"><span>04</span><strong>Medical Colleges</strong><span>Teaching and department equipment</span></div>
+        <div class="industry-card"><span>05</span><strong>Distributors</strong><span>Bulk fulfilment and margin support</span></div>
+        <div class="industry-card"><span>06</span><strong>Government Tenders</strong><span>Compliance and documentation support</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="solutions" style="text-align:center;">
+    <style>
+      #solutions .section-head{flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px}
+      #solutions .section-copy{margin-left:0;text-align:center}
+    </style>
+    <div class="container">
+      <div class="section-head">
+        <div><span class="eyebrow">Hospital Setup Solutions</span><h2 class="section-title">Department-wise packages for faster buying.</h2></div>
+        <p class="section-copy">Package cards help customers move from browsing individual products to requesting full-room or full-department quotations.</p>
+      </div>
+      <div class="solutions-grid">
+        <div class="solution-card"><strong>ICU Setup</strong><p>Ventilator, monitor, infusion pump, ICU bed, suction, syringe pump and accessories.</p></div>
+        <div class="solution-card"><strong>OT Setup</strong><p>OT table, LED light, surgical instruments, sterilization and emergency support units.</p></div>
+        <div class="solution-card"><strong>Diagnostic Centre</strong><p>ECG, vitals, ultrasound accessories, sample collection and imaging-ready add-ons.</p></div>
+        <div class="solution-card"><strong>NICU Setup</strong><p>Infant warmer, incubator, phototherapy, neonatal monitor and oxygen support.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="products" id="projects" style="text-align:center;">
+    <style>
+      #projects .section-head{flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px}
+      #projects .section-copy{margin-left:0;text-align:center}
+    </style>
+    <div class="container">
+      <div class="section-head">
+        <div><span class="eyebrow">Recent Installations</span><h2 class="section-title">Project proof that builds buyer confidence.</h2></div>
+        <p class="section-copy">References like Narang and Medical Equipment India sell trust through scale. This section gives buyers confidence before they enquire.</p>
+      </div>
+      <div class="install-grid">
+        <article class="install-card"><img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=900&q=80" alt="Hospital ward installation"><div class="install-body"><strong>40-bed ward furniture supply</strong><span>Private hospital, Jaipur | Beds, trolleys, cabinets</span></div></article>
+        <article class="install-card"><img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=900&q=80" alt="ICU monitor installation"><div class="install-body"><strong>ICU monitoring upgrade</strong><span>Multi-speciality hospital, Delhi | Monitors and pumps</span></div></article>
+        <article class="install-card"><img src="https://images.unsplash.com/photo-1588776813677-77aaf5595b83?auto=format&fit=crop&w=900&q=80" alt="Laboratory installation"><div class="install-body"><strong>Lab sterilization package</strong><span>Diagnostic lab, Pune | Autoclave and lab equipment</span></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" style="text-align:center;">
+    <style>
+      #about .section-head{flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px}
+      #about .section-copy{margin-left:0;text-align:center}
+    </style>
+    <div class="container">
+      <div class="section-head">
+        <div><span class="eyebrow">Why Kriscel Med Solution</span><h2 class="section-title">Built around what hospital buyers actually need.</h2></div>
+        <p class="section-copy">Professional frontend is not only decoration. Buyers need fast discovery, clear categories, trust signals, real enquiry paths and post-sale confidence.</p>
+      </div>
+      <div class="why-grid">
+        <div class="why-card"><strong>Catalogue-first UI</strong><p>Products and categories are visible early, not hidden below marketing content.</p></div>
+        <div class="why-card"><strong>Quote conversion</strong><p>Search, filters, WhatsApp and request quote CTAs reduce buying friction.</p></div>
+        <div class="why-card"><strong>Procurement support</strong><p>Model, specs, documents, warranty and AMC signals are shown clearly.</p></div>
+        <div class="why-card"><strong>Project credibility</strong><p>Recent installations, brands, industries and certifications create trust.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="certifications" aria-label="Certifications marquee" style="text-align:center;">
+    <style>
+      #certifications .section-head{flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px}
+      #certifications .section-copy{margin-left:0;text-align:center}
+    </style>
+    <div class="container">
+      <div class="section-head">
+        <div><span class="eyebrow">Certifications</span><h2 class="section-title">Compliance-ready information for purchase files.</h2></div>
+        <p class="section-copy">This area can be connected to downloadable PDFs, certificate scans, product brochures and tender documents.</p>
+      </div>
+      <div class="cert-marquee-wrap">
+        <div class="cert-marquee" aria-hidden="true">
+          <!-- Duplicate list for seamless continuous marquee -->
+          <div class="cert-row">
+            <div class="cert-card"><span class="cert-mark">ISO</span><strong>ISO 13485</strong><p>Quality management</p></div>
+            <div class="cert-card"><span class="cert-mark">CE</span><strong>CE</strong><p>Selected equipment</p></div>
+            <div class="cert-card"><span class="cert-mark">CDS</span><strong>CDSCO</strong><p>Registration support</p></div>
+            <div class="cert-card"><span class="cert-mark">GST</span><strong>GST Ready</strong><p>Formal billing</p></div>
+            <div class="cert-card"><span class="cert-mark">WAR</span><strong>Warranty</strong><p>Coverage options</p></div>
+            <div class="cert-card"><span class="cert-mark">AMC</span><strong>AMC</strong><p>Service support</p></div>
+          </div>
+          <div class="cert-row">
+            <div class="cert-card"><span class="cert-mark">ISO</span><strong>ISO 13485</strong><p>Quality management</p></div>
+            <div class="cert-card"><span class="cert-mark">CE</span><strong>CE</strong><p>Selected equipment</p></div>
+            <div class="cert-card"><span class="cert-mark">CDS</span><strong>CDSCO</strong><p>Registration support</p></div>
+            <div class="cert-card"><span class="cert-mark">GST</span><strong>GST Ready</strong><p>Formal billing</p></div>
+            <div class="cert-card"><span class="cert-mark">WAR</span><strong>Warranty</strong><p>Coverage options</p></div>
+            <div class="cert-card"><span class="cert-mark">AMC</span><strong>AMC</strong><p>Service support</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="downloads" id="downloads" style="text-align:center;">
+    <style>
+      #downloads .section-head{flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px}
+      #downloads .section-copy{margin-left:0;text-align:center}
+    </style>
+    <div class="container">
+      <div class="section-head">
+        <div><span class="eyebrow">Downloads</span><h2 class="section-title">Brochures and buying documents.</h2></div>
+        <p class="section-copy">A B2B medical site should make sales documents easy to request or download.</p>
+      </div>
+      <div class="download-row">
+        <div class="download-card"><strong>Complete Product Catalogue</strong><p class="section-copy">Category-wise hospital equipment list.</p><a class="btn btn-soft" href="contact.html#contact">Request PDF</a></div>
+        <div class="download-card"><strong>Hospital Setup Checklist</strong><p class="section-copy">ICU, OT, ward, lab and NICU checklist.</p><a class="btn btn-soft" href="contact.html#contact">Request PDF</a></div>
+        <div class="download-card"><strong>Certification Pack</strong><p class="section-copy">Documents for procurement review.</p><a class="btn btn-soft" href="contact.html#contact">Request PDF</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="container contact-grid">
+      <div class="contact-card">
+        <span class="eyebrow">Contact</span>
+        <h2 class="section-title">Send your requirement and get a structured quote.</h2>
+        <p class="section-copy">Mention product, quantity, city, department and documentation needs for a faster response.</p>
+        <div class="contact-list">
+          <div>
+            <span class="contact-icon" aria-hidden="true">
+              <!-- Phone icon (inline SVG) -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 1.11 4.18 2 2 0 0 1 3.11 2h3a2 2 0 0 1 2 1.72c.12.86.32 1.7.59 2.51a2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6 6l1.57-1.16a2 2 0 0 1 2.11-.45c.81.27 1.65.47 2.51.59A2 2 0 0 1 22 16.92Z" fill="currentColor"/>
+              </svg>
+            </span>
+            <p><strong>Phone</strong><span>+91 98765 43210</span></p>
+          </div>
+          <div>
+            <span class="contact-icon" aria-hidden="true">
+              <!-- WhatsApp icon -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20.52 3.48A19.86 19.86 0 0 0 12 2C6.48 2 2 6.48 2 12c0 1.61.4 3.16 1.17 4.57L2 22l5.6-1.17A9.9 9.9 0 0 0 12 21c5.52 0 10-4.48 10-10 0-2.5-.96-4.78-1.48-7.52ZM12 19a7.97 7.97 0 0 1-3.9-1.02l-.38-.22-3.14.66.66-3.08-.24-.39A7.98 7.98 0 0 1 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8Z" fill="currentColor"/>
+                <path d="M16.5 14.2c-.24-.12-1.44-.71-1.66-.79-.22-.08-.38-.12-.54.12-.16.24-.62.79-.76.95-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.95-1.2-.72-.64-1.2-1.42-1.34-1.66-.14-.24-.02-.37.1-.49.1-.1.22-.28.33-.42.11-.14.14-.24.22-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.48-.4-.42-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.66 2.56 4.02 3.58.56.24 1 .38 1.34.49.56.18 1.06.16 1.46.1.44-.06 1.44-.6 1.64-1.18.2-.58.2-1.08.14-1.18-.06-.1-.22-.16-.46-.28Z" fill="currentColor"/>
+              </svg>
+            </span>
+            <p><strong>WhatsApp</strong><span>Product catalogue and quick enquiry</span></p>
+          </div>
+          <div>
+            <span class="contact-icon" aria-hidden="true">
+              <!-- Email icon -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm16 2H4l8 6 8-6Zm0 12V8l-8 6-8-6v10h16Z" fill="currentColor"/>
+              </svg>
+            </span>
+            <p><strong>Email</strong><span>sales@kriscelmed.in</span></p>
+          </div>
+          <div>
+            <span class="contact-icon" aria-hidden="true">
+              <!-- Map pin icon -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5Z" fill="currentColor"/>
+              </svg>
+            </span>
+            <p><strong>Office</strong><span>Medical District, New Delhi - 110001</span></p>
+          </div>
+        </div>
+      </div>
+      <form class="contact-card" id="quoteForm">
+        <div class="form-grid">
+          <div class="field"><label for="name">Name</label><input id="name" type="text" placeholder="Dr. Rajesh Kumar" required></div>
+          <div class="field"><label for="phone">Phone</label><input id="phone" type="tel" placeholder="+91 98XXX XXXXX" required></div>
+          <div class="field"><label for="email">Email</label><input id="email" type="email" placeholder="purchase@hospital.com"></div>
+          <div class="field"><label for="org">Organization</label><input id="org" type="text" placeholder="Hospital / clinic / distributor"></div>
+          <div class="field"><label for="category">Equipment Category</label><select id="category"><option>ICU Equipment</option><option>Hospital Furniture</option><option>Diagnostic Equipment</option><option>Surgical Instruments</option><option>Laboratory Equipment</option><option>Infant Care Equipment</option><option>Dental Equipment</option></select></div>
+          <div class="field"><label for="qty">Quantity</label><input id="qty" type="number" min="1" placeholder="10"></div>
+          <div class="field full"><label for="message">Message</label><textarea id="message" rows="4" placeholder="Share equipment model, delivery city, budget range, installation or certification requirements."></textarea></div>
+          <div class="field full"><button class="btn btn-primary" type="submit">Submit Enquiry</button></div>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html"><span class="brand-mark">K</span><span class="brand-text"><strong>Kriscel Med</strong><span>Solution</span></span></a>
+        <p>Medical and hospital equipment supplier for hospitals, clinics, labs, distributors and government procurement teams.</p>
+      </div>
+      <div>
+        <div class="footer-title">Equipment</div>
+        <ul class="footer-links">
+          <li><a href="equipment.html#products?cat=ICU%20Equipment">ICU Equipment</a></li>
+          <li><a href="equipment.html#products?cat=Hospital%20Furniture">Hospital Furniture</a></li>
+          <li><a href="equipment.html#products?cat=Diagnostic%20Equipment">Diagnostics</a></li>
+          <li><a href="equipment.html#products?cat=Laboratory%20Equipment">Lab Equipment</a></li>
+          <li><a href="equipment.html#products?cat=Dental%20Equipment">Dental Equipment</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="brands.html#brands">Brands</a></li>
+          <li><a href="industries.html#industries">Industries</a></li>
+          <li><a href="projects.html#projects">Projects</a></li>
+          <li><a href="downloads.html#downloads">Downloads</a></li>
+          <li><a href="about.html#about">About</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-title">Contact</div>
+        <ul class="footer-links">
+          <li>+91 98765 43210</li>
+          <li>sales@kriscelmed.in</li>
+          <li>WhatsApp catalogue available</li>
+          <li>ISO 13485 | CE | AMC Support</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Copyright 2026 Kriscel Med Solution. All rights reserved.</span>
+      <span>GST: 07AAACM1234A1Z5 | CDSCO registration support</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const products=[
+  {cat:"ICU Equipment",name:"ICU Ventilator VC-900",model:"KMS-VC900",img:"https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=700&q=80",desc:"Advanced turbine ventilator for adult and pediatric critical care.",specs:["VCV/PCV","TFT Display","CE","AMC"]},
+  {cat:"ICU Equipment",name:"Multiparameter Patient Monitor",model:"KMS-PM900",img:"https://images.unsplash.com/photo-1588776813677-77aaf5595b83?auto=format&fit=crop&w=700&q=80",desc:"Bedside monitoring for ICU, emergency and recovery departments.",specs:["ECG","SpO2","NIBP","ISO"]},
+  {cat:"Hospital Furniture",name:"Five Function Electric ICU Bed",model:"KMS-BED5F",img:"https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=700&q=80",desc:"Electric ICU bed with ABS panels, rails and central braking.",specs:["5 Function","ABS","Warranty","Bulk"]},
+  {cat:"Hospital Furniture",name:"Emergency Recovery Trolley",model:"KMS-TR120",img:"https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=700&q=80",desc:"Patient movement trolley for emergency and ward use.",specs:["SS Frame","Castors","IV Pole","CE"]},
+  {cat:"Diagnostic Equipment",name:"12 Lead ECG Machine",model:"KMS-ECG12",img:"https://images.unsplash.com/photo-1588776813677-77aaf5595b83?auto=format&fit=crop&w=700&q=80",desc:"Portable ECG with thermal printer and hospital workflow modes.",specs:["12 Lead","Printer","Portable","ISO"]},
+  {cat:"Diagnostic Equipment",name:"Digital Vital Signs Monitor",model:"KMS-VSM8",img:"https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=700&q=80",desc:"Compact vitals monitor for OPD, wards and triage areas.",specs:["NIBP","SpO2","TEMP","Battery"]},
+  {cat:"Surgical Instruments",name:"LED Operation Theatre Light",model:"KMS-OTL70",img:"https://images.unsplash.com/photo-1551190822-a9333d879b1f?auto=format&fit=crop&w=700&q=80",desc:"High-lux shadowless OT light with adjustable arms.",specs:["LED","OT","Low Heat","CE"]},
+  {cat:"Laboratory Equipment",name:"Digital Laboratory Autoclave",model:"KMS-LAB120",img:"https://images.unsplash.com/photo-1588776813677-77aaf5595b83?auto=format&fit=crop&w=700&q=80",desc:"Sterilization unit for hospitals, labs and dental clinics.",specs:["Digital","Safety Valve","SS","Warranty"]},
+  {cat:"Infant Care Equipment",name:"Infant Radiant Warmer",model:"KMS-NICU40",img:"https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=700&q=80",desc:"NICU warmer with skin probe, alarm and bassinet support.",specs:["NICU","Servo","Alarm","ISO"]},
+  {cat:"Dental Equipment",name:"Electric Dental Chair Unit",model:"KMS-DEN5",img:"https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&w=700&q=80",desc:"Complete dental chair with LED light and instrument tray.",specs:["Motorized","LED","Compressor","CE"]}
+];
+const grid=document.getElementById("productGrid");
+const emptyState=document.getElementById("emptyState");
+const catalogueSearch=document.getElementById("catalogueSearch");
+let activeFilter="All";
+
+function card(p){
+  const text=encodeURIComponent(`Hello, I need a quote for ${p.name} (${p.model}).`);
+  return `<article class="product-card">
+    <div class="product-img"><img src="${p.img}" alt="${p.name}" loading="lazy"><span class="badge">${p.cat}</span></div>
+    <div class="product-body">
+      <div class="product-meta"><span>${p.model}</span><span>Quote Ready</span></div>
+      <h3>${p.name}</h3>
+      <p>${p.desc}</p>
+      <div class="specs">${p.specs.map(s=>`<span>${s}</span>`).join("")}</div>
+      <div class="product-actions">
+        <a class="btn btn-soft btn-small" href="contact.html#contact">View Details</a>
+        <a class="btn btn-primary btn-small" href="contact.html#contact">Get Quote</a>
+        <a class="wa" href="https://wa.me/919876543210?text=${text}" aria-label="WhatsApp enquiry for ${p.name}">WA</a>
+      </div>
+    </div>
+  </article>`;
+}
+function currentQuery(){
+  return catalogueSearch ? (catalogueSearch.value||"").trim().toLowerCase() : "";
+}
+function render(){
+  const q=currentQuery();
+  const filtered=products.filter(p=>{
+    const hay=(p.cat+" "+p.name+" "+p.model+" "+p.desc+" "+p.specs.join(" ")).toLowerCase();
+    return (activeFilter==="All"||p.cat===activeFilter)&&(!q||hay.includes(q));
+  });
+  grid.innerHTML=filtered.map(card).join("");
+  emptyState.style.display=filtered.length?"none":"block";
+}
+const filtersEl=document.getElementById("filters");
+if(filtersEl){
+  filtersEl.addEventListener("click",e=>{
+    const btn=e.target.closest(".filter-btn");
+    if(!btn)return;
+    activeFilter=btn.dataset.filter;
+    document.querySelectorAll(".filter-btn").forEach(b=>b.classList.toggle("active",b===btn));
+    render();
+  });
+}
+document.querySelectorAll(".category-card").forEach(cardEl=>{
+  cardEl.addEventListener("click",()=>{
+    activeFilter=cardEl.dataset.jump;
+    const filterBtns=document.querySelectorAll(".filter-btn");
+    if(filterBtns.length) filterBtns.forEach(b=>b.classList.toggle("active",b.dataset.filter===activeFilter));
+    // Open equipment page with preselected category
+    // For file:// navigation, keep category inside the hash so it survives.
+    const target = `equipment.html#products?cat=${encodeURIComponent(activeFilter)}`;
+    window.location.href = target;
+  });
+});
+if(catalogueSearch){
+  catalogueSearch.addEventListener("input",render);
+}
+const searchIcon=document.getElementById("searchIcon");
+if(searchIcon){
+  searchIcon.addEventListener("click",()=>{
+    window.location.href="equipment.html#products";
+    if(catalogueSearch) setTimeout(()=>catalogueSearch.focus(),350);
+  });
+}
+document.getElementById("menuBtn").addEventListener("click",()=>document.getElementById("navLinks").classList.toggle("open"));
+document.getElementById("navLinks").addEventListener("click",e=>{
+  const toggle=e.target.closest("[data-dropdown-toggle]");
+  if(toggle){
+    e.preventDefault();
+    const item=toggle.closest(".has-menu");
+    document.querySelectorAll(".has-menu.open").forEach(menu=>{if(menu!==item)menu.classList.remove("open");});
+    item.classList.toggle("open");
+    return;
+  }
+  if(e.target.closest(".dropdown a")||e.target.closest("li:not(.has-menu)>a")){
+    document.getElementById("navLinks").classList.remove("open");
+  }
+});
+document.addEventListener("click",e=>{
+  if(!e.target.closest(".has-menu")) document.querySelectorAll(".has-menu.open").forEach(menu=>menu.classList.remove("open"));
+});
+document.getElementById("quoteForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  const btn=e.currentTarget.querySelector("button");
+  btn.textContent="Enquiry Sent - Our team will contact you soon";
+  btn.style.background="#4F443B";
+});
+const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add("visible");}),{threshold:.12});
+document.querySelectorAll(".reveal,.category-card,.product-card,.brand-logo,.industry-card,.solution-card,.install-card,.why-card,.cert-card,.download-card").forEach(el=>observer.observe(el));
+
+// Hero Slider (Text only)
+let currentSlide=0;
+const textSlides=document.querySelectorAll(".hero-text-slide");
+const dots=document.querySelectorAll(".hero-dot");
+const totalSlides=textSlides.length;
+
+console.log("Hero Slider Init:", {totalSlides, textSlides: textSlides.length, dots: dots.length});
+
+function showSlide(index){
+  console.log("Showing slide:", index);
+  textSlides.forEach((slide,i)=>{
+    slide.classList.remove("active","exit");
+    if(i===index){
+      slide.classList.add("active");
+    }else if(i===currentSlide){
+      slide.classList.add("exit");
+    }
+  });
+  dots.forEach((dot,i)=>{
+    dot.classList.toggle("active",i===index);
+  });
+  currentSlide=index;
+}
+
+function nextSlide(){
+  const next=(currentSlide+1)%totalSlides;
+  console.log("Next slide:", next);
+  showSlide(next);
+}
+
+// Auto slide every 2 seconds
+if(totalSlides>0){
+  let slideInterval=setInterval(nextSlide,2000);
+  console.log("Auto-slider started with", totalSlides, "slides");
+  
+  // Dot click handlers
+  dots.forEach((dot,index)=>{
+    dot.addEventListener("click",()=>{
+      console.log("Dot clicked:", index);
+      showSlide(index);
+      clearInterval(slideInterval);
+      slideInterval=setInterval(nextSlide,2000);
+    });
+  });
+
+  // Pause on hover
+  const heroSection=document.querySelector(".hero");
+  if(heroSection){
+    heroSection.addEventListener("mouseenter",()=>clearInterval(slideInterval));
+    heroSection.addEventListener("mouseleave",()=>{
+      slideInterval=setInterval(nextSlide,4000);
+    });
+  }
+}else{
+  console.error("No text slides found!");
+}
+
+render();
+</script>
+</body>
+</html>
+
+
