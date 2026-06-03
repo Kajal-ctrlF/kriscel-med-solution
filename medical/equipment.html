@@ -165,11 +165,13 @@ footer{background:var(--text);color:rgba(246,240,230,.84);padding:54px 0 24px}
           <div style="display:flex;gap:10px;align-items:center;">
             <span class="tool-label">Sort by</span>
             <select id="sortSelect" class="catalogue-search" style="width:auto;min-width:190px;cursor:pointer;">
-              <option value="relevance" selected>Relevance</option>
+              <option value="popular" selected>Popular</option>
+              <option value="latest">Latest First</option>
+              <option value="price_low">Price: Low to High</option>
+              <option value="price_high">Price: High to Low</option>
               <option value="name_asc">Name (A-Z)</option>
               <option value="name_desc">Name (Z-A)</option>
               <option value="cat_asc">Category (A-Z)</option>
-              <option value="model_asc">Model (A-Z)</option>
             </select>
           </div>
         </div>
@@ -338,21 +340,21 @@ const categoryCopy={
 };
 
 const products=[
-  {cat:"ICU Equipment",name:"ICU Ventilator VC-900",model:"KMS-VC900",img:"https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=700&q=80",desc:"Advanced turbine ventilator for adult and pediatric critical care.",specs:["VCV/PCV","TFT Display","CE","AMC"]},
-  {cat:"ICU Equipment",name:"Multiparameter Patient Monitor",model:"KMS-PM900",img:"https://images.unsplash.com/photo-1588776813677-77aaf5595b83?auto=format&fit=crop&w=700&q=80",desc:"Bedside monitoring for ICU, emergency and recovery departments.",specs:["ECG","SpO2","NIBP","ISO"]},
-  {cat:"ICU Equipment",name:"Syringe Infusion Pump",model:"KMS-IP240",img:"https://images.unsplash.com/photo-1581089781785-603411fa81e5?auto=format&fit=crop&w=700&q=80",desc:"Accurate infusion delivery for ICU medication and critical care protocols.",specs:["Dose Mode","Alarm","Battery","NICU"]},
-  {cat:"ICU Equipment",name:"Emergency Defibrillator",model:"KMS-DF200",img:"https://images.unsplash.com/photo-1519494080410-f9aa8f52f1e4?auto=format&fit=crop&w=700&q=80",desc:"Portable defibrillator with monitoring support for emergency response.",specs:["AED","ECG","Portable","CE"]},
-  {cat:"Hospital Furniture",name:"Five Function Electric ICU Bed",model:"KMS-BED5F",img:"https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=700&q=80",desc:"Electric ICU bed with ABS panels, rails and central braking.",specs:["5 Function","ABS","Warranty","Bulk"]},
-  {cat:"Hospital Furniture",name:"Emergency Recovery Trolley",model:"KMS-TR120",img:"https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=700&q=80",desc:"Patient movement trolley for emergency and ward use.",specs:["SS Frame","Castors","IV Pole","CE"]},
-  {cat:"Diagnostic Equipment",name:"12 Lead ECG Machine",model:"KMS-ECG12",img:"https://images.unsplash.com/photo-1588776813677-77aaf5595b83?auto=format&fit=crop&w=700&q=80",desc:"Portable ECG with thermal printer and hospital workflow modes.",specs:["12 Lead","Printer","Portable","ISO"]},
-  {cat:"Diagnostic Equipment",name:"Digital Vital Signs Monitor",model:"KMS-VSM8",img:"https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=700&q=80",desc:"Compact vitals monitor for OPD, wards and triage areas.",specs:["NIBP","SpO2","TEMP","Battery"]},
-  {cat:"Surgical Instruments",name:"LED Operation Theatre Light",model:"KMS-OTL70",img:"https://images.unsplash.com/photo-1551190822-a9333d879b1f?auto=format&fit=crop&w=700&q=80",desc:"High-lux shadowless OT light with adjustable arms.",specs:["LED","OT","Low Heat","CE"]},
-  {cat:"Laboratory Equipment",name:"Digital Laboratory Autoclave",model:"KMS-LAB120",img:"https://images.unsplash.com/photo-1588776813677-77aaf5595b83?auto=format&fit=crop&w=700&q=80",desc:"Sterilization unit for hospitals, labs and dental clinics.",specs:["Digital","Safety Valve","SS","Warranty"]},
-  {cat:"Infant Care Equipment",name:"Infant Radiant Warmer",model:"KMS-NICU40",img:"https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=700&q=80",desc:"NICU warmer with skin probe, alarm and bassinet support.",specs:["NICU","Servo","Alarm","ISO"]},
-  {cat:"Dental Equipment",name:"Electric Dental Chair Unit",model:"KMS-DEN5",img:"https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&w=700&q=80",desc:"Complete dental chair with LED light and instrument tray.",specs:["Motorized","LED","Compressor","CE"]},
-  {cat:"Physiotherapy & Rehabilitation",name:"Motorized Treatment Table",model:"KMS-PHY80",img:"https://images.unsplash.com/photo-1571019613914-85f342c6a11e?auto=format&fit=crop&w=700&q=80",desc:"Height-adjustable therapy table for physiotherapy and rehab clinics.",specs:["Motorized","Rehab","Stable","Warranty"]},
-  {cat:"Ophthalmic Equipment",name:"Slit Lamp Microscope",model:"KMS-EYE20",img:"https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=700&q=80",desc:"Eye examination microscope for clinics and ophthalmology departments.",specs:["LED","Optics","Clinic","CE"]},
-  {cat:"X-Ray & Imaging Accessories",name:"Lead Apron and Shielding Set",model:"KMS-IMG10",img:"https://images.unsplash.com/photo-1519494080410-f9aa8f52f1e4?auto=format&fit=crop&w=700&q=80",desc:"Radiology protection accessories for X-ray and imaging rooms.",specs:["Lead","Radiology","Safety","Bulk"]}
+  {cat:"ICU Equipment",name:"ICU Ventilator VC-900",model:"KMS-VC900",price:450000,dateAdded:"2026-05-20",popular:95,img:"https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=700&q=80",desc:"Advanced turbine ventilator for adult and pediatric critical care.",specs:["VCV/PCV","TFT Display","CE","AMC"]},
+  {cat:"ICU Equipment",name:"Multiparameter Patient Monitor",model:"KMS-PM900",price:125000,dateAdded:"2026-05-15",popular:92,img:"https://images.unsplash.com/photo-1588776813677-77aaf5595b83?auto=format&fit=crop&w=700&q=80",desc:"Bedside monitoring for ICU, emergency and recovery departments.",specs:["ECG","SpO2","NIBP","ISO"]},
+  {cat:"ICU Equipment",name:"Syringe Infusion Pump",model:"KMS-IP240",price:75000,dateAdded:"2026-05-10",popular:88,img:"https://images.unsplash.com/photo-1581089781785-603411fa81e5?auto=format&fit=crop&w=700&q=80",desc:"Accurate infusion delivery for ICU medication and critical care protocols.",specs:["Dose Mode","Alarm","Battery","NICU"]},
+  {cat:"ICU Equipment",name:"Emergency Defibrillator",model:"KMS-DF200",price:180000,dateAdded:"2026-04-28",popular:85,img:"https://images.unsplash.com/photo-1519494080410-f9aa8f52f1e4?auto=format&fit=crop&w=700&q=80",desc:"Portable defibrillator with monitoring support for emergency response.",specs:["AED","ECG","Portable","CE"]},
+  {cat:"Hospital Furniture",name:"Five Function Electric ICU Bed",model:"KMS-BED5F",price:95000,dateAdded:"2026-05-25",popular:94,img:"https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=700&q=80",desc:"Electric ICU bed with ABS panels, rails and central braking.",specs:["5 Function","ABS","Warranty","Bulk"]},
+  {cat:"Hospital Furniture",name:"Emergency Recovery Trolley",model:"KMS-TR120",price:28000,dateAdded:"2026-05-18",popular:80,img:"https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=700&q=80",desc:"Patient movement trolley for emergency and ward use.",specs:["SS Frame","Castors","IV Pole","CE"]},
+  {cat:"Diagnostic Equipment",name:"12 Lead ECG Machine",model:"KMS-ECG12",price:85000,dateAdded:"2026-05-22",popular:91,img:"https://images.unsplash.com/photo-1588776813677-77aaf5595b83?auto=format&fit=crop&w=700&q=80",desc:"Portable ECG with thermal printer and hospital workflow modes.",specs:["12 Lead","Printer","Portable","ISO"]},
+  {cat:"Diagnostic Equipment",name:"Digital Vital Signs Monitor",model:"KMS-VSM8",price:45000,dateAdded:"2026-05-12",popular:87,img:"https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=700&q=80",desc:"Compact vitals monitor for OPD, wards and triage areas.",specs:["NIBP","SpO2","TEMP","Battery"]},
+  {cat:"Surgical Instruments",name:"LED Operation Theatre Light",model:"KMS-OTL70",price:220000,dateAdded:"2026-04-30",popular:83,img:"https://images.unsplash.com/photo-1551190822-a9333d879b1f?auto=format&fit=crop&w=700&q=80",desc:"High-lux shadowless OT light with adjustable arms.",specs:["LED","OT","Low Heat","CE"]},
+  {cat:"Laboratory Equipment",name:"Digital Laboratory Autoclave",model:"KMS-LAB120",price:65000,dateAdded:"2026-05-08",popular:86,img:"https://images.unsplash.com/photo-1588776813677-77aaf5595b83?auto=format&fit=crop&w=700&q=80",desc:"Sterilization unit for hospitals, labs and dental clinics.",specs:["Digital","Safety Valve","SS","Warranty"]},
+  {cat:"Infant Care Equipment",name:"Infant Radiant Warmer",model:"KMS-NICU40",price:155000,dateAdded:"2026-05-05",popular:89,img:"https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=700&q=80",desc:"NICU warmer with skin probe, alarm and bassinet support.",specs:["NICU","Servo","Alarm","ISO"]},
+  {cat:"Dental Equipment",name:"Electric Dental Chair Unit",model:"KMS-DEN5",price:175000,dateAdded:"2026-05-28",popular:90,img:"https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&w=700&q=80",desc:"Complete dental chair with LED light and instrument tray.",specs:["Motorized","LED","Compressor","CE"]},
+  {cat:"Physiotherapy & Rehabilitation",name:"Motorized Treatment Table",model:"KMS-PHY80",price:52000,dateAdded:"2026-05-14",popular:78,img:"https://images.unsplash.com/photo-1571019613914-85f342c6a11e?auto=format&fit=crop&w=700&q=80",desc:"Height-adjustable therapy table for physiotherapy and rehab clinics.",specs:["Motorized","Rehab","Stable","Warranty"]},
+  {cat:"Ophthalmic Equipment",name:"Slit Lamp Microscope",model:"KMS-EYE20",price:135000,dateAdded:"2026-05-01",popular:82,img:"https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=700&q=80",desc:"Eye examination microscope for clinics and ophthalmology departments.",specs:["LED","Optics","Clinic","CE"]},
+  {cat:"X-Ray & Imaging Accessories",name:"Lead Apron and Shielding Set",model:"KMS-IMG10",price:18000,dateAdded:"2026-04-25",popular:75,img:"https://images.unsplash.com/photo-1519494080410-f9aa8f52f1e4?auto=format&fit=crop&w=700&q=80",desc:"Radiology protection accessories for X-ray and imaging rooms.",specs:["Lead","Radiology","Safety","Bulk"]}
 ];
 
 const grid=document.getElementById("productGrid");
@@ -429,11 +431,14 @@ function render(){
     return (activeFilter==="All"||p.cat===activeFilter) && (!q||hay.includes(q));
   });
   const sorted=[...filtered].sort((a,b)=>{
+    if(sortMode==="popular") return b.popular - a.popular;
+    if(sortMode==="latest") return new Date(b.dateAdded) - new Date(a.dateAdded);
+    if(sortMode==="price_low") return a.price - b.price;
+    if(sortMode==="price_high") return b.price - a.price;
     if(sortMode==="name_asc") return a.name.localeCompare(b.name);
     if(sortMode==="name_desc") return b.name.localeCompare(a.name);
     if(sortMode==="cat_asc") return a.cat.localeCompare(b.cat)||a.name.localeCompare(b.name);
-    if(sortMode==="model_asc") return a.model.localeCompare(b.model);
-    return products.indexOf(a)-products.indexOf(b);
+    return b.popular - a.popular; // default to popular
   });
   grid.innerHTML=sorted.map(card).join("");
   emptyState.style.display=filtered.length?"none":"block";
