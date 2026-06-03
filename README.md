@@ -217,9 +217,34 @@ Products are managed via JavaScript object in each page. See `equipment.html` fo
 
 ## 🌐 Deployment
 
-### GitHub Pages (Recommended) ✅
+### Render (Recommended) ⚡
 
-Your site is already configured for GitHub Pages!
+Your site is **already configured for Render** with `render.yaml`!
+
+#### Quick Deploy Steps:
+1. Go to **[Render Dashboard](https://dashboard.render.com)**
+2. Sign up/login (use GitHub for easy connection)
+3. Click **"New +"** → **"Static Site"**
+4. Connect your repository: `Kajal-ctrlF/kriscel-med-solution`
+5. Configure:
+   - **Root Directory**: `medical`
+   - **Publish Directory**: `.`
+   - **Build Command**: Leave empty
+6. Click **"Create Static Site"**
+7. Your site will be live at: `https://kriscel-med-solution.onrender.com` ✨
+
+**Features:**
+- ✅ Free SSL/HTTPS
+- ✅ Global CDN
+- ✅ Auto-deploy on git push
+- ✅ 100GB bandwidth/month
+- ✅ Custom domain support
+
+📖 **[Detailed Deploy Guide](DEPLOY.md)** - Step-by-step instructions with screenshots
+
+---
+
+### GitHub Pages (Alternative) 
 
 1. Go to your repository: `https://github.com/Kajal-ctrlF/kriscel-med-solution`
 2. Navigate to **Settings** → **Pages**
@@ -228,7 +253,9 @@ Your site is already configured for GitHub Pages!
 5. Click **Save**
 6. Your site will be live at: `https://kajal-ctrlf.github.io/kriscel-med-solution/medical/`
 
-### Alternative Hosting Options
+---
+
+### Other Hosting Options
 
 #### Netlify
 ```bash
@@ -424,13 +451,4 @@ Potential improvements:
 
 ---
 
-### 🚀 Ready to Deploy?
 
-Push your changes and enable GitHub Pages:
-```bash
-git add .
-git commit -m "Add comprehensive README"
-git push origin main
-```
-
-Then enable GitHub Pages in your repository settings to go live! 🎊
