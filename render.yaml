@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: kriscel-med-solution
+    env: static
+    buildCommand: echo "No build required"
+    staticPublishPath: ./medical
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

@@ -1,0 +1,7 @@
+# Render ignore file - files to exclude from deployment
+.vscode/
+.qodo/
+*.md
+serve-local.js
+test-video.html
+equipment_data_template.csv
